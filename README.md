@@ -40,7 +40,9 @@ godot --headless --path <新项目>/GAME --script res://tools/set_renderer.gd --
 | 路径 | 作用 |
 |---|---|
 | `new-game.sh` | 生成脚本（复制骨架 → 替换工程名/渲染器 → `git init` → 首次提交） |
-| `godot-2d/` | Godot 工程骨架（`assets/ scenes/ scripts/ tools/ DEV/ SOURCE/`）。它本身不是一个可玩的游戏，**别直接打开** |
+| `godot-2d/` | Godot 工程骨架（`assets/ scenes/ scripts/ tools/ DEV/`）。它本身不是一个可玩的游戏，**别直接打开** |
+| `godot-2d/tools/engine/` | **工程设置工具**（跨项目可复用）：设置主场景、切渲染器、像素地基、注入输入动作 |
+| `godot-2d/tools/debug/` | **玩法调试件**（本作专属）——**发布前整个删掉**。骨架里只有一份 README 说明用途 |
 | `docs/` | 文档模板（GDD / ROADMAP / 文件树规范 / devlog），生成时拷进新项目的 `docs/` |
 | `PROJECT_INDEX.template.md` | 项目索引模板，生成时替换 `__PROJECT_NAME__` / `__PROJECT_DIR__` / `__DATE__` |
 
@@ -71,5 +73,6 @@ Godot 官方 Project Manager 的 New Project **只有 3 个渲染器预设，不
 
 本模板按"**每开一个新项目、每踩一次坑就回来改**"的方式迭代，改动记在 `docs/PROJECT_TREE_TEMPLATE.md` 的版本记录里。
 
+- v0.3（2026-10-11）：新增 `tools/` 二分（`engine/` 跨项目可复用 / `debug/` 发布前删除）与"功能分组：一组同名目录"约定 —— 均来自 dummy-bird 的实操回流。
 - v0.2（2026-10-11）：`SORCE`→`SOURCE`；主场景与渲染器工具化；抽出独立仓。
 - v0.1（2026-10-11）：首版，随 dummy-bird 起盘建立。
