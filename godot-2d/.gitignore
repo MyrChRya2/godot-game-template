@@ -1,0 +1,15 @@
+# Godot 引擎生成物（可重新生成）
+.godot/
+/android/
+*.translation
+
+# Godot 导出产物
+export_presets.cfg
+EXPORTS/
+build/
+dist/
+
+# 系统垃圾
+.DS_Store
+Thumbs.db
+*~ *.bak *.tmp *.log
