@@ -61,6 +61,12 @@ Godot 官方 Project Manager 的 New Project **只有 3 个渲染器预设，不
 - **EditorPlugin 加"生成目录结构"菜单**：有先有鸡还是先有蛋的问题——插件必须已存在于工程内才能运行，而"新建工程时选模板"发生在工程存在之前。它只能优化"新建之后的第一次整理"，替代不了本仓。
 - 若 Godot 官方将来支持本地项目模板（proposal #3388 落地），直接改用它。
 
+## 许可
+
+**MIT License**（见 `LICENSE`），Copyright (c) 2026 MyrChRya2。可自由用于商业项目、可修改、可再分发，只需保留版权声明。
+
+> `godot-2d/icon.svg` 来自 Godot 引擎自带的默认工程图标模板，版权归 Godot Engine 贡献者所有（MIT）。用它做新项目图标时请留意，正式发布前建议替换为原创图标。
+
 ## 版本与演进
 
 本模板按"**每开一个新项目、每踩一次坑就回来改**"的方式迭代，改动记在 `docs/PROJECT_TREE_TEMPLATE.md` 的版本记录里。
