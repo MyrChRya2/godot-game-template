@@ -55,14 +55,67 @@ echo "▶ 生成项目：$TARGET"
 echo "  渲染器：$RENDERER ($RM)"
 
 # ---------- 1) 复制骨架 ----------
-mkdir -p "$TARGET"
+# 结构：$SKELETON/（GAME 内容）→ $TARGET/GAME/；$SCRIPT_DIR/SOURCE/ → $TARGET/SOURCE/
+[[ -d "$SKELETON" ]] || die "找不到骨架目录：$SKELETON"
+[[ -d "$SCRIPT_DIR/SOURCE" ]] || die "找不到源文件模板：$SCRIPT_DIR/SOURCE"
+
+mkdir -p "$TARGET/GAME" "$TARGET/docs/devlog" "$TARGET/SOURCE"
 cp -a "$SKELETON/." "$TARGET/GAME/"
-mkdir -p "$TARGET/docs/devlog" "$TARGET/SOURCE"
-cp -a "$TARGET/GAME/SOURCE/." "$TARGET/SOURCE/" 2>/dev/null || true
-rm -rf "$TARGET/GAME/SOURCE" "$TARGET/GAME/docs"
-cp "$TARGET/GAME/.gitignore"  "$TARGET/.gitignore"
-cp "$TARGET/GAME/.gitattributes" "$TARGET/.gitattributes"
-cp "$TARGET/GAME/.editorconfig"  "$TARGET/.editorconfig"
+rm -rf "$TARGET/GAME/docs"                    # 骨架里的空 docs 占位不需要
+cp -a "$SCRIPT_DIR/SOURCE/." "$TARGET/SOURCE/"
+
+# 工程级配置：骨架自带的 Godot 专用 .gitignore + 换行/编辑器统一配置
+cp "$SKELETON/.gitignore"     "$TARGET/GAME/.gitignore"
+cp "$SKELETON/.gitattributes" "$SKELETON/.editorconfig" "$TARGET/GAME/"
+
+# 仓库根配置：比工程级更全（含本机私有目录、导出物、IDE）
+cat > "$TARGET/.gitignore" <<'GITIGNORE_EOF'
+# ============================================================
+# 仓库级忽略规则（仓库根 = 项目根；GAME/ 是 Godot 工程）
+# 原则：忽略"机器生成 / 可重新生成 / 本机私有"的东西；
+#       源文件（含 .aseprite / .psd）一律入库——没版本控制 = 没备份。
+# ============================================================
+
+# ---------- AI 会话 / 记忆数据（本机私有，绝不入库）----------
+.dsh-meow/
+.dsh/
+
+# ---------- Godot 引擎生成物 ----------
+.godot/
+/android/
+*.translation
+
+# ---------- Godot 导出产物 ----------
+export_presets.cfg
+EXPORTS/
+EXPORTS_*/
+build/
+dist/
+
+# ---------- 编辑器 / 系统垃圾 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.orig
+*.rej
+*.bak
+*.tmp
+*.log
+
+# ---------- IDE / 工具 ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---------- 本机私有配置 ----------
+*.local
+.env
+.env.*
+!.env.example
+GITIGNORE_EOF
+cp "$SKELETON/.gitattributes" "$SKELETON/.editorconfig" "$TARGET/"
 
 # ---------- 2) 替换工程配置占位符 ----------
 GODOT_FILE="$TARGET/GAME/project.godot"
