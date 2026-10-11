@@ -62,6 +62,7 @@ GAME/
 │   ├── player/
 │   ├── systems/
 │   └── ui/
+├── tools/                   # 引擎侧工具脚本（如 set_main_scene.gd）
 ├── shaders/                 # .gdshader（需要时创建）
 ├── addons/                  # 第三方/自研编辑器插件（需要时创建）
 ├── DEV/                     # ★ 开发草稿区（见 §2.3）
@@ -97,7 +98,19 @@ GAME/
 - **晋升机制**：草稿验证成功 → 在编辑器里移到 `scenes/`/`scripts/` 并纳入正式引用；验证失败 → 直接删。
 - 可选优化：给 `DEV/` 放一个空的 `.gdignore`，Godot 不再扫描它（不参与导入、不进导出包）。**代价**：`DEV/` 里的场景将无法在编辑器里运行——所以只在草稿区稳定后再开。
 
-### 2.4 什么时候该拆目录（避免过度设计）
+### 2.4 主场景（`run/main_scene`）—— 起盘必做
+
+**没有主场景的工程，按 F5 必然报 `Error: Can't run project: no main scene defined in the project.`**
+本骨架已预置 `scenes/Main.tscn` + `run/main_scene` 来消除它。
+
+设置方式二选一：
+
+- **编辑器**：Project → Project Settings → Application → Run → Main Scene
+- **命令行**：`godot --headless --path <GAME 目录> --script res://tools/set_main_scene.gd -- res://scenes/MyScene.tscn`
+
+⚠️ **不要手改 `project.godot` 文本去写 UID**：Godot 的 UID 是 `0-9a-v` 编码，编造的 UID 可能非法。走引擎的 `ProjectSettings.save()`（即上面两种方式）让引擎自己决定格式——它会写成 `run/main_scene="uid://xxxxx"`。
+
+### 2.5 什么时候该拆目录（避免过度设计）
 
 **不要一开始就建 `core/`、`managers/`、`interfaces/` 十层目录**——那是给还不存在的复杂度付租金。
 

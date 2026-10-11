@@ -13,12 +13,18 @@ cd templates
 
 生成后：**Godot → Project Manager → Import → 选 `<新项目>/GAME/project.godot`**。
 
+> 骨架自带主场景 `scenes/Main.tscn`，**开箱即可按 F5**。要改成自己的场景：
+> ```bash
+> godot --headless --path <新项目>/GAME --script res://tools/set_main_scene.gd -- res://scenes/MyScene.tscn
+> ```
+> 或在编辑器里 Project → Project Settings → Application → Run → Main Scene。
+
 ## 结构
 
 | 路径 | 作用 |
 |---|---|
 | `new-game.sh` | 生成脚本：复制骨架 → 替换工程名/渲染器 → `git init -b main` → 首次提交 |
-| `godot-2d/` | Godot 工程骨架（`assets/ scenes/ scripts/ DEV/` + 被忽略的配置）。**本身不是一个可玩工程，别直接打开** |
+| `godot-2d/` | Godot 工程骨架（`assets/ scenes/ scripts/ tools/ DEV/` + 被忽略的配置）。**自带默认主场景 `scenes/Main.tscn`，生成后开箱即可按 F5，不会撞 `no main scene defined` 报错**。它本身不是一个可玩的游戏，别直接打开 |
 | `docs/` | 文档模板（GDD / ROADMAP / 文件树模板 / devlog），生成时拷进新项目的 `docs/` |
 | `PROJECT_INDEX.template.md` | 项目索引模板，生成时替换 `__PROJECT_NAME__` / `__PROJECT_DIR__` / `__DATE__` |
 
