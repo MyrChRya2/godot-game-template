@@ -14,7 +14,7 @@ __PROJECT_NAME__/             # ← Git 仓库根 = 项目根
 ├── PROJECT_INDEX.md          # skill 配置入口 + 空间地图
 ├── docs/                     # 文档中心（见 §3）
 ├── GAME/                     # Godot 工程（引擎目录）
-├── SORCE/                    # 美术/音频源文件母版（可编辑工程）
+├── SOURCE/                    # 美术/音频源文件母版（可编辑工程）
 └── .gitignore .gitattributes .editorconfig
 ```
 
@@ -27,7 +27,7 @@ __PROJECT_NAME__/             # ← Git 仓库根 = 项目根
 
 > 唯一注意：Godot 编辑器"重新扫描文件系统"只覆盖 `GAME/` 内部，`docs/` 的变更 Godot 完全不感知——这正是分层的目的。
 
-### `SORCE/`（美术源文件）为什么必须单独存在且必须入库
+### `SOURCE/`（美术源文件）为什么必须单独存在且必须入库
 
 - **源文件 ≠ 运行时素材**：`.aseprite` / `.psd` / `.kra` / `.blend` 是"母版"，`GAME/assets/` 里的是"导出成品"（`.png` / `.wav`）。
 - 母版放 `GAME/assets/` 有三个坏处：被 `res://` 扫描、进导出包、体积膨胀。
@@ -35,13 +35,13 @@ __PROJECT_NAME__/             # ← Git 仓库根 = 项目根
 - 目录按"素材类型 → 用途"两级，与 `GAME/assets/` **同名结构**，方便一一对应：
 
 ```
-SORCE/
+SOURCE/
 ├── sprite/{bg,entity,item,tile}/   # 与 GAME/assets/sprite/ 同名
 ├── audio/                          # 与 GAME/assets/audio/ 同名
 └── _ref/                           # 参考图、灵感收集、竞品截图
 ```
 
-> 注：`SORCE` 是 `SOURCE` 的旧拼写（沿用自本模板初版来源项目）。**若要统一，改名为 `SOURCE/` 并同步 `PROJECT_INDEX.md`。**
+> 注：目录名统一拼作 `SOURCE`。若你偏好 `SRC` 或 `art-src` 之类更短的写法，改名后同步 `PROJECT_INDEX.md` 即可。
 
 ---
 
@@ -189,7 +189,7 @@ Godot 官方 Project Manager 的 **New Project** 只有渲染器预设（Forward
 
 | # | 决策项 | 选项 | 状态 |
 |---|---|---|---|
-| T1 | `SORCE/` 是否改名 `SOURCE/` | 改名统一 / 保留 | ⬜ |
+| T1 | `SOURCE/` 是否改名 `SOURCE/` | 改名统一 / 保留 | ⬜ |
 | T2 | `DEV/` 是否加 `.gdignore` | 加（不被扫描）/ 不加（可运行） | ⬜ |
 | T3 | 何时升级到"功能文件夹"形态 | 按 §2.4 阶段 4 判据 / 一开始就用 | ⬜ |
 | T4 | 是否抽出独立 git 模板仓 | 独立仓 / 随主项目走 | ⬜ |

@@ -10,7 +10,7 @@
 #   ├── PROJECT_INDEX.md   # 从 templates/PROJECT_INDEX.template.md 生成并替换占位符
 #   ├── docs/              # GDD / ROADMAP / 文件树模板 / devlog 骨架
 #   ├── GAME/              # Godot 工程（assets/scenes/scripts/DEV）
-#   ├── SORCE/             # 美术/音频源文件母版
+#   ├── SOURCE/             # 美术/音频源文件母版
 #   ├── .gitignore / .gitattributes / .editorconfig
 #   └── .git               # 已 git init + 首次提交
 # ============================================================
@@ -57,9 +57,9 @@ echo "  渲染器：$RENDERER ($RM)"
 # ---------- 1) 复制骨架 ----------
 mkdir -p "$TARGET"
 cp -a "$SKELETON/." "$TARGET/GAME/"
-mkdir -p "$TARGET/docs/devlog" "$TARGET/SORCE"
-cp -a "$TARGET/GAME/SORCE/." "$TARGET/SORCE/" 2>/dev/null || true
-rm -rf "$TARGET/GAME/SORCE" "$TARGET/GAME/docs"
+mkdir -p "$TARGET/docs/devlog" "$TARGET/SOURCE"
+cp -a "$TARGET/GAME/SOURCE/." "$TARGET/SOURCE/" 2>/dev/null || true
+rm -rf "$TARGET/GAME/SOURCE" "$TARGET/GAME/docs"
 cp "$TARGET/GAME/.gitignore"  "$TARGET/.gitignore"
 cp "$TARGET/GAME/.gitattributes" "$TARGET/.gitattributes"
 cp "$TARGET/GAME/.editorconfig"  "$TARGET/.editorconfig"
@@ -135,7 +135,7 @@ if [[ ! -d .git ]]; then
   git add .
   git commit -q -m "chore: scaffold $PROJECT_NAME from godot-2d template
 
-- 仓库根=项目根，GAME/ 为 Godot 工程，SORCE/ 为美术源文件母版
+- 仓库根=项目根，GAME/ 为 Godot 工程，SOURCE/ 为美术源文件母版
 - 目录骨架：assets/ scenes/ scripts/ DEV/（见 docs/PROJECT_TREE_TEMPLATE.md）"
   COMMITTED="yes"
 else
