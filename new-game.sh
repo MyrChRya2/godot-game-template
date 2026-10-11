@@ -85,12 +85,23 @@ cat > "$TARGET/.gitignore" <<'GITIGNORE_EOF'
 /android/
 *.translation
 
-# ---------- Godot 导出产物 ----------
-export_presets.cfg
+# ---------- Godot 导出产物（只忽略产物，不忽略配置）----------
+# ⚠️ export_presets.cfg 必须【提交】——它记录 Web/Android 导出配置，
+#    官方版本控制文档明确建议入库；忽略它会让换机后无法一键导出。
 EXPORTS/
 EXPORTS_*/
 build/
 dist/
+
+# ---------- 签名密钥（绝不入库）----------
+*.keystore
+*.jks
+*.pepk
+release.keystore
+
+# ---------- 注：*.uid 必须提交 ----------
+# Godot 4.4+ 为脚本/资源生成 .uid（稳定资源标识），官方建议入库。
+# 因此这里【有意不忽略】*.uid。
 
 # ---------- 编辑器 / 系统垃圾 ----------
 .DS_Store
