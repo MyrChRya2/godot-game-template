@@ -24,7 +24,7 @@ cd <本仓目录>
 要换成自己的场景（两种方式等价）：
 
 ```bash
-godot --headless --path <新项目>/GAME --script res://tools/set_main_scene.gd -- res://scenes/MyScene.tscn
+godot --headless --path <新项目>/GAME --script res://tools/engine/set_main_scene.gd -- res://scenes/MyScene.tscn
 ```
 
 或在编辑器里 Project → Project Settings → Application → Run → Main Scene。
@@ -32,7 +32,7 @@ godot --headless --path <新项目>/GAME --script res://tools/set_main_scene.gd 
 要换渲染器：
 
 ```bash
-godot --headless --path <新项目>/GAME --script res://tools/set_renderer.gd -- gl   # gl | forward | mobile
+godot --headless --path <新项目>/GAME --script res://tools/engine/set_renderer.gd -- gl   # gl | forward | mobile
 ```
 
 ## 目录结构
@@ -73,6 +73,7 @@ Godot 官方 Project Manager 的 New Project **只有 3 个渲染器预设，不
 
 本模板按"**每开一个新项目、每踩一次坑就回来改**"的方式迭代，改动记在 `docs/PROJECT_TREE_TEMPLATE.md` 的版本记录里。
 
+- v0.4（2026-10-12）：**像素地基默认值修正**——`set_pixel_perfect.gd` 与骨架 `project.godot` 的 `stretch/aspect` 由 `expand` 改 **`keep`**（`expand` 会让可见区域随窗口比例变化 → 画面穿帮）；工具注释补上三种 aspect 的取舍与实测数据。顺带修掉 `tools/` 二分后残留的旧路径（`res://tools/…` → `res://tools/engine/…`）。来源：dummy-bird 实测回流。
 - v0.3（2026-10-11）：新增 `tools/` 二分（`engine/` 跨项目可复用 / `debug/` 发布前删除）与"功能分组：一组同名目录"约定 —— 均来自 dummy-bird 的实操回流。
 - v0.2（2026-10-11）：`SORCE`→`SOURCE`；主场景与渲染器工具化；抽出独立仓。
 - v0.1（2026-10-11）：首版，随 dummy-bird 起盘建立。

@@ -1,9 +1,9 @@
-# 🗂️ 游戏项目文件树基础模板（v0.3）
+# 🗂️ 游戏项目文件树基础模板（v0.4）
 
 > 本文件是**跨项目复用**的目录规范：说明每一层放什么、为什么这么分、什么时候该拆。
 > 它随 dummy-bird 一起演进——**每开一个新项目、每踩一次"文件找不到"的坑，就回来改本文件并升版本号。**
-> 配套可直接复制的骨架：`templates/godot-2d/`，生成脚本 `templates/new-game.sh`。
-> 最后更新：2026-10-11
+> 配套可直接复制的骨架：`godot-2d/`，生成脚本 `new-game.sh`。
+> 最后更新：2026-10-12
 
 ---
 
@@ -244,6 +244,7 @@ Godot 官方 Project Manager 的 **New Project** 只有渲染器预设（Forward
 
 ## 7. 版本记录
 
+- **v0.4（2026-10-12）** **文件树本身未变**：修正骨架的像素地基默认值——`set_pixel_perfect.gd` 与 `godot-2d/project.godot` 的 `stretch/aspect` 由 `expand` 改 **`keep`**（`expand` 会按窗口比例扩展视口短轴 → 可见区域变化 → 画面穿帮；实测同尺寸方形窗口下 expand 得到 320×320、keep 恒为 320×180）；工具注释同时补上三种 aspect 的取舍。顺带修掉 `tools/` 二分后残留的旧路径（README 与本文件的 `res://tools/…` → `res://tools/engine/…`、`templates/godot-2d/` → `godot-2d/`）。来源：dummy-bird 2026-10-12 实操回流。
 - **v0.3（2026-10-11）** 新增 §2.6（tools 二分 engine/debug）与 §2.7（功能分组：一组同名目录）；§2.5 演化表补"功能成组"阶段；待决策补 T6/T7。来源：dummy-bird 障碍物系统从 DEV 转正 + tools 混放的实操。
 - **v0.2（2026-10-11）** 全部 5 项待决策落实：`SORCE`→`SOURCE`、`DEV/` 不加 `.gdignore`、按阶段判据演化、模板抽出独立仓、不做 EditorPlugin。
 - **v0.1（2026-10-11）** 首版：确立「仓库根=项目根」、`assets/scenes/scripts/DEV` 四层、`SOURCE/` 源文件层、文档中心四文件、四阶段演化判据。来源：dummy-bird 起盘 + 本机 4 个同类项目实测对比。
