@@ -7,7 +7,8 @@
 #
 # 生成内容：
 #   <输出目录>/<项目名>/
-#   ├── PROJECT_INDEX.md   # 从 templates/PROJECT_INDEX.template.md 生成并替换占位符
+#   ├── README.md          # 从 README.template.md 生成（双语），替换项目名与日期
+#   ├── PROJECT_INDEX.md   # 从 PROJECT_INDEX.template.md 生成并替换占位符
 #   ├── docs/              # GDD / ROADMAP / 文件树模板 / devlog 骨架
 #   ├── GAME/              # Godot 工程（assets/scenes/scripts/DEV）
 #   ├── SOURCE/             # 美术/音频源文件母版
@@ -144,6 +145,16 @@ if [[ -f "$INDEX_TEMPLATE" ]]; then
       "$INDEX_TEMPLATE" > "$TARGET/PROJECT_INDEX.md"
 else
   echo "（提示）未找到 PROJECT_INDEX.template.md，跳过索引生成" >&2
+fi
+
+# 根 README（新项目自带结构说明，不用手写）
+README_TEMPLATE="$SCRIPT_DIR/README.template.md"
+if [[ -f "$README_TEMPLATE" ]]; then
+  sed -e "s/__PROJECT_NAME__/$PROJECT_NAME/g" \
+      -e "s/__DATE__/$(date +%Y-%m-%d)/g" \
+      "$README_TEMPLATE" > "$TARGET/README.md"
+else
+  echo "（提示）未找到 README.template.md，跳过根 README 生成" >&2
 fi
 
 # 从 templates/docs/ 复制文档模板（若存在）

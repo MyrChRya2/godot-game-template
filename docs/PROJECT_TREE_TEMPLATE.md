@@ -244,6 +244,7 @@ Godot 官方 Project Manager 的 **New Project** 只有渲染器预设（Forward
 
 ## 7. 版本记录
 
+- **v0.5（2026-10-27）** 生成物补齐 + 文档双语化：`new-game.sh` 现在额外生成**根 `README.md`**（来自新增的 `README.template.md`，替换 `__PROJECT_NAME__` / `__DATE__`）——此前新项目的根目录只有 `PROJECT_INDEX.md`，与本文档要求的根 README 不一致；README（本仓）改为中英双语，并补入「分组依据四条原则」与「给 AI 的复刻合约（MUST/SHOULD + 验收自检）」。**文件树本身未变**。来源：dummy-bird 2026-10-27 README 实践回流。
 - **v0.4（2026-10-12）** **文件树本身未变**：修正骨架的像素地基默认值——`set_pixel_perfect.gd` 与 `godot-2d/project.godot` 的 `stretch/aspect` 由 `expand` 改 **`keep`**（`expand` 会按窗口比例扩展视口短轴 → 可见区域变化 → 画面穿帮；实测同尺寸方形窗口下 expand 得到 320×320、keep 恒为 320×180）；工具注释同时补上三种 aspect 的取舍。顺带修掉 `tools/` 二分后残留的旧路径（README 与本文件的 `res://tools/…` → `res://tools/engine/…`、`templates/godot-2d/` → `godot-2d/`）。来源：dummy-bird 2026-10-12 实操回流。
 - **v0.3（2026-10-11）** 新增 §2.6（tools 二分 engine/debug）与 §2.7（功能分组：一组同名目录）；§2.5 演化表补"功能成组"阶段；待决策补 T6/T7。来源：dummy-bird 障碍物系统从 DEV 转正 + tools 混放的实操。
 - **v0.2（2026-10-11）** 全部 5 项待决策落实：`SORCE`→`SOURCE`、`DEV/` 不加 `.gdignore`、按阶段判据演化、模板抽出独立仓、不做 EditorPlugin。
